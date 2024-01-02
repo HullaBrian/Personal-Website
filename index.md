@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Jonathan Beierle
-subtitle: Software Developer interested in network automation and cyber security. 
+subtitle: Software | Network | Security
 ---
 
 - Freshman Computer Science student at UTSA
