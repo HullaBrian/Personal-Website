@@ -1,3 +1,3 @@
-# Peronal-Website
+# Personal-Website
 
 Hello!
