@@ -15,15 +15,15 @@ In each of the following sections, I'll present a routing protocol. Then, I'll g
 
 # Contents
 - [Introduction](#introduction)
-- [Open Shortest Path First (OSPF)](#open-shortest-path-first-(ospf))
-- [Enhanced Interior Gateway Routing Protocol (EIGRP)](#enhanced-interior-gateway-routing-protocol-(eigrp))
-- [Border Gateway Protocol (BGP)](#border-gateway-protocol-(bgp))
+- [Open Shortest Path First (OSPF)](#open-shortest-path-first)
+- [Enhanced Interior Gateway Routing Protocol (EIGRP)](#enhanced-interior-gateway-routing-protocol)
+- [Border Gateway Protocol (BGP)](#border-gateway-protocol)
 
-# Open Shortest Path First (OSPF)
+# Open Shortest Path First
 Nothing here for now...
 
-# Enhanced Interior Gateway Routing Protocol (EIGRP)
+# Enhanced Interior Gateway Routing Protocol
 Nothing here for now...
 
-# Border Gateway Protocol (BGP)
+# Border Gateway Protocol
 Nothing here for now...
