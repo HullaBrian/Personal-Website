@@ -2,8 +2,8 @@
 layout: post
 title: Common Pitfalls in Network Security
 subtitle: "Some Do's and Don'ts at the Network Level"
-thumbnail-img: /assets/img/sinkhole.jpg
-share-img: /assets/img/sinkhole.jpg
+thumbnail-img: /assets/img/common-pitfalls-in-network-security/sinkhole.jpg
+share-img: /assets/img/common-pitfalls-in-network-security/sinkhole.jpg
 author: Jonathan Beierle
 tags: ["Network Security"]
 ---
@@ -125,7 +125,7 @@ having a VLAN specifically so that you can manage your switch management interfa
 to ensuring a secure network environment.
 
 ## Addresses Addresses Everywhere, Not Any Bit Distinct
-![alt text](/assets/img/ocean.jpg)
+![alt text](/assets/img/common-pitfalls-in-network-security/ocean.jpg)
 
 Subnetting is one of the first things taught in any network class, and is a foundational concept in
 any good network. You may be asking, why is this being talked about to secure a network? Well,
@@ -146,7 +146,7 @@ into `FW-1.local`. Should an organization include VLAN IDs into an IP address, h
 
 # General
 ## Storing Passwords in Insecure Places
-![alt text](/assets/img/sicilian-dies.webp)
+![alt text](/assets/img/common-pitfalls-in-network-security/sicilian-dies.webp)
 
 Perhaps one of the oldest tricks in the book when it comes to a network compromise is storing
 credentials in an insecure place. Do NOT have a `passwords.txt` files with the password for
@@ -184,7 +184,7 @@ regarding all of - if not - most of the network. This can be achieved through pr
 documentation.
 
 ## Limited Device and Network Visibility
-![alt text](/assets/img/no-visibility.gif)
+![alt text](/assets/img/common-pitfalls-in-network-security/no-visibility.gif)
 
 One of the worst things that can happen to an organization in terms of responding to an incident
 is when they have little to no visibility into what's going on with their network or network

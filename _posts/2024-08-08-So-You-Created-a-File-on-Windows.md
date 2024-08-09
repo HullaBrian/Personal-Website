@@ -2,8 +2,8 @@
 layout: post
 title: So You Created a File on Windows
 subtitle: ""
-thumbnail-img: /assets/img/autopsy-initial-file.png
-share-img: /assets/img/command-output.png
+thumbnail-img: /assets/img/so-you-created-a-file-on-windows/autopsy-initial-file.png
+share-img: /assets/img/so-you-created-a-file-on-windows/command-output.png
 author: Jonathan Beierle
 tags: ["Digital Forensics"]
 ---
@@ -51,7 +51,7 @@ create a brand new `Windows 10 Pro N` VM. Next, I'll login, open file explorer,
 and create a new file called `HELLO-WORLD.txt` in the `C:\Users\user\Documents`
 directory.
 
-![alt text](/assets/img/file-creation.png)
+![alt text](/assets/img/so-you-created-a-file-on-windows/file-creation.png)
 
 Now, I need to be able to access all forensic artifacts in a way that nothing will
 change while I'm working, so I turn off the VM and copy the `.vmdk` file to a
@@ -72,7 +72,7 @@ In the case of `HELLO-WORLD.txt`, it was located on volume 6 of the .vmdk file
 specifically under the path:
 `/img_Windows10.vmdk/vol_vol6/Users/user/Documents/HELLO-WORLD.txt`
 
-![alt text](/assets/img/autopsy-initial-file.png)
+![alt text](/assets/img/so-you-created-a-file-on-windows/autopsy-initial-file.png)
 
 ## MFT
 The **Master File Table** (**MFT**) is perhaps one of the most important
@@ -83,7 +83,7 @@ volume. For this example, at least, the MFT for the VM can be found in the path
 To find what's left behind by `HELLO-WORLD.txt` in the MFT, I first extracted it
 using autopsy, then opened it using the `MFT Explorer` tool.
 
-![alt text](/assets/img/mft-view.png)
+![alt text](/assets/img/so-you-created-a-file-on-windows/mft-view.png)
 
 As seen in the above screenshot, there's a lot of valuable information that can be
 recovered about a given file from the MFT, including, but not limited to:
@@ -110,12 +110,12 @@ Then, I used the `TimelineExplorer` tool to view the extracted data
 
 `C:\Tools\Zimmerman\TimelineExplorer\TimelineExplorer.exe .\MFT-J.csv`
 
-![alt text](/assets/img/command-output.png)
+![alt text](/assets/img/so-you-created-a-file-on-windows/command-output.png)
 
 After the TimelineExplorer opened, I filtered all `Name` entries for
 `HELLO-WORLD.txt`, which resulted in the following table output
 
-![alt text](/assets/img/usn-journal.png)
+![alt text](/assets/img/so-you-created-a-file-on-windows/usn-journal.png)
 
 As you can see, simply creating a file has produced several artifacts within
 the USN. For starters, we first see that a new text file is created, called
