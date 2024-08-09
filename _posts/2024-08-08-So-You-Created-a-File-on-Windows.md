@@ -2,8 +2,8 @@
 layout: post
 title: So You Created a File on Windows
 subtitle: ""
-thumbnail-img: /assets/img/test-bench.jpg
-share-img: /assets/img/test-bench.jpg
+thumbnail-img: /assets/img/autopsy-initial-file.jpg
+share-img: /assets/img/command-output.jpg
 author: Jonathan Beierle
 tags: ["Digital Forensics"]
 ---
