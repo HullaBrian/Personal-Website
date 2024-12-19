@@ -32,7 +32,9 @@ In short, this is a technique primarily designed at defense evasion and assistan
 # Attack Technique
 Although this attack may be executed in a multitude of ways, there is still one common factor - WDAC. Because WDAC policies deny by default it is extraordinarily trivial to block many EDR sensors from loading. However, a primary consideration for an adversary is both establishing their own access while restricting the access of defensive solutions. Hence the WDAC policy would need to explicitly allow an adversary execution privileges in order to make sense from an offensive perspective. This is where crafting a specialized WDAC policy is most useful. With a custom policy an adversary may stop EDR sensors, while also allowing themselves execution permissions.
 
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/Killing-EDR-with-WDAC.drawio.png)
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/Killing-EDR-with-WDAC.drawio.png" />
+</p>
 
 This attack may be executed in 3 general phases:
 
@@ -52,19 +54,26 @@ The first requirement is very easy to implement - just turn off audit mode. For 
 
 Another important consideration is compatibility. Making sure that the WDAC policy will work on the most number of endpoints possible is very important. The policy should therefore use **single policy format** so as to maximize compatibility. For this example, I will allow application executions in `C:\Users\Public`. To create this policy, I will be using the `App Control Policy Wizard`. First, select the `Policy Creator`
 
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/policy-creation-1.png)
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/policy-creation-1.png" />
+</p>
 
 As previously mentioned, a **single policy format** is the best option for compatibility.
 
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/policy-creation-2.png)
-
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/policy-creation-2.png" />
+</p>
 This policy should be restrictive enough to where EDR will surely not run. Therefore, select the `Default Windows Mode`.
 
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/policy-creation-3.png)
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/policy-creation-3.png" />
+</p>
 
 Now, configure the policy with the necessary requirements mentioned earlier. First, **disable audit mode** and enable the setting `Disable Runtime Filepath Rules` to allow the whitelisting of file paths in the policy.
 
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/policy-creation-4.png)
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/policy-creation-4.png" />
+</p>
 
 Click the `Add Custom` option and ensure that the:
 1. scope is set to user mode only (path rules cannot apply to kernel mode code)
@@ -72,17 +81,25 @@ Click the `Add Custom` option and ensure that the:
 3. rule type is `Path`
 4. `Reference File` is set to the `Folder` option, and points to `C:\Users\Public\*`
 
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/policy-creation-5.png)
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/policy-creation-5.png" />
+</p>
 
 Ensure that the rule was correctly added. As a rule of thumb, I generally merge the policy with recommended block rules. Although it is not required.
 
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/policy-creation-6.png)
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/policy-creation-6.png" />
+</p>
 
 Now, the policy should generate and appear in the current user's documents folder.
 
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/policy-creation-7.png)
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/policy-creation-7.png" />
+</p>
 
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/policy-creation-8.png)
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/policy-creation-8.png" />
+</p>
 
 In addition to the compiled policy, an XML representation of the policy configuration is generated. While the XML file is useful in that it may be edited later to be more versatile, the compiled policy used in the attack itself is the `SiPolicy.p7b` file.
 
@@ -100,7 +117,9 @@ For a full domain deployment of WDAC, a user needs the ability to create Group P
 ### Local Machine
 Using this attack on a local machine is by far the most simple out of all methods previously mentioned. To apply the WDAC policy, the policy (`SiPolicy.p7b`) needs to be moved to the proper location (`C:\Windows\System32\CodeIntegrity\`).
 
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/local-machine.png)
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/local-machine.png" />
+</p>
 
 ```powershell
 cp .\SiPolicy.p7b C:\Windows\System32\CodeIntegrity\
@@ -108,15 +127,21 @@ cp .\SiPolicy.p7b C:\Windows\System32\CodeIntegrity\
 
 Just to confirm, check the status of the EDR service:
 
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/edr-service-running.png)
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/edr-service-running.png" />
+</p>
 
 Next, reboot the machine and check if the EDR service is still running:
 
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/edr-service-stopped.png)
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/edr-service-stopped.png" />
+</p>
 
 Now that EDR is disabled, it is trivial to disable Windows Defender and begin dropping other tooling to disk in the location whitelisted by the WDAC policy (in this example `C:\Users\Public\*`).
 
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/edr-gone-winpeas-hello.png)
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/edr-gone-winpeas-hello.png" />
+</p>
 
 ### Remote Machine
 Remote deployment, although very similar to deployment on a local machine, has one slight difference: the movement of the WDAC policy and rebooting occurs remotely. This may occur through a variety of means, but the most convenient way is via Windows built-in SMB shares. Thankfully, because the only action to implement the WDAC configuration is moving the policy into the CodeIntegrity folder, this can be done with administrative privileges through the built in `C$` or `ADMIN$` shares. 
@@ -127,7 +152,9 @@ Below is a simple example of uploading the policy directly from a Linux machine.
 smbmap -u Administrator -p P@ssw0rd -H 192.168.4.4 --upload "/home/kali/SiPolicy.p7b" "ADMIN\$/System32/CodeIntegrity/SiPolicy.p7b"
 ```
 
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/smbmap-upload.png)
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/smbmap-upload.png" />
+</p>
 
 After placing the WDAC policy in the correct place, reboot the machine:
 
@@ -135,7 +162,9 @@ After placing the WDAC policy in the correct place, reboot the machine:
 smbmap -u Administrator -p P@ssw0rd -H 192.168.4.4 -x "shutdown /r /t 0"
 ```
 
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/smbmap-reboot.png)
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/smbmap-reboot.png" />
+</p>
 
 Additionally a purpose-built tool has been created to carry out this attack. [**Krueger**](https://github.com/logangoins/Krueger) is a custom tool written in C# by [Logan Goins](https://x.com/_logangoins) specifically meant to be run in memory as part of post-exploitation lateral movement activities. The example below uses `inlineExecute-Assembly` (created by [@anthemtotheego](https://x.com/anthemtotheego)) to execute the .NET assembly in memory.
 
@@ -143,11 +172,14 @@ Additionally a purpose-built tool has been created to carry out this attack. [**
 inlineExecute-Assembly --dotnetassembly C:\Tools\Krueger.exe --assemblyargs --host ms01
 ```
 
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/krueger-running.png)
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/krueger-running.png" />
+</p>
 
 ### Full Domain
-
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/Full%20Domain.drawio.svg)
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/Full%20Domain.drawio.svg" />
+</p>
 
 Although using this attack technique on a singular host is already impactful, it can be made much more potent if an adversary is able to gain administrative access to an Active Directory domain. Once attaining the permissions of a Domain Admin, Enterprise Admin, or group that may create GPOs, an adversary may distribute a malicious group policy to computers in the domain. This poses a whole host of threats to an organization, but in the case of this attack technique in particular, every EDR sensor on every endpoint could be stopped within a relatively short period of time by simply applying a WDAC policy and rebooting the machines. The execution flow for this attack is laid out below:
 
@@ -179,7 +211,9 @@ For example, a basic WDAC policy that only allows Windows binaries and WHQL sign
 
 On the other hand, there are EDR vendors that employ WHQL signed drivers, thereby requiring the WDAC policy to specifically block that vendor's drivers. Thankfully, this requirement makes detection much easier because mentions of certain EDR vendors may be flagged. While the format of compiled WDAC policies is not publicly accessible, perhaps the easiest way to detect a potentially malicious policy is simply by observing the strings contained within it. As seen in the below screenshot, dumping the strings from a WDAC policy provides all of the executables, drivers, and file attributes that are referenced in the policy, although for security reasons the file attributes referenced are redacted.
 
-![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/wdac-policy-strings.png)
+<p align="center">
+    <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/wdac-policy-strings.png" />
+</p>
 
 While creating a detection solely based off of strings could detect malicious policies, doing so creates a significant number of false positives. Therefore, having the ability to detect bytes within the compiled policy becomes of the essence. After analyzing dumps of compiled WDAC policies, there were a few key observations made as to how compiled WDAC policies are structured.
 
