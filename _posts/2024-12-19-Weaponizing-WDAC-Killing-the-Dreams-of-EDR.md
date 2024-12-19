@@ -20,7 +20,7 @@ tags: ["Windows Security", "Active Directory"]
 - [Mitigations](#mitigation)
 
 # The Concept
-Windows Defender Application Control (WDAC) is a technology introduced with and automatically enabled by default Windows 10+ and Windows Server 2016+ that allows organizations fine grained control over the executable code that is permitted to run on their Windows machines. A WDAC configuration applies to the entire machine and affects all users of the device. Applied WDAC configuration is widespread and strict, including rules for user and kernel-mode applications, drivers, DLLs, and scripts. WDAC provides an excellent tool for defenders to block potential threats from execution on Windows endpoints, but WDAC can also be utilized offensively.
+Windows Defender Application Control (WDAC) is a technology introduced with and automatically **enabled by default** on Windows 10+ and Windows Server 2016+ that allows organizations fine grained control over the executable code that is permitted to run on their Windows machines. A WDAC configuration applies to the entire machine and affects all users of the device. Applied WDAC configuration is widespread and strict, including rules for user and kernel-mode applications, drivers, DLLs, and scripts. WDAC provides an excellent tool for defenders to block potential threats from execution on Windows endpoints, but WDAC can also be utilized offensively.
 
 While WDAC is often used defensively, it can also be used to block telemetry sources and security solutions such as Endpoint Detection and Response (EDR) sensors. These sensors tend to execute in kernel space and intentionally make themselves difficult to stop or tamper with. However, because WDAC may apply policies to kernel-mode executables and drivers, EDR sensors are at risk if an adversary is able to apply a WDAC policy - which can be done with remote administrative privileges. When a policy is applied at boot the EDR sensor is no longer allowed to run and thus will not load, thereby allowing an adversary to operate without the constraints of EDR.
 
@@ -43,12 +43,12 @@ This attack may be executed in 3 general phases:
 3. Once the machine begins the reboot process, the WDAC policy applies before any EDR driver and stops it before it can execute.
 
 ## Crafting the WDAC Policy
-The context of the environment being attacked is extremely important for this technique to be successful due to some EDR vendors having [Windows Hardware Quality Labs (WHQL)](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/whql-release-signature) drivers. These drivers are allowed by default on WDAC policies and will allow WHQL signed EDR drivers to load despite their services not running. During testing it was found that although the EDR service was successfully blocked, the EDR's driver was allowed to load and continued to show activity. While perhaps the most obvious solution to this from an adversarial perspective would be to simply disallow WHQL drivers, this creates significant risk of the endpoint failing to boot. After all, the goal of this technique is ultimately to assist in lateral movement procedures, which becomes impossible if the device never boots. Therefore, a better way to specifically block kernel mode components is to block based off either a specific publisher or file attribute. During testing, it was found that some EDR vendors have drivers that will not allow the machine to boot if not allowed to run. These drivers did not appear to send any network traffic, so it was decided to not block based off of publisher alone and instead focus on blocking based off of file attributes. This proved to be extremely successful, as the targeted drivers and executables were not allowed to load without device disruption.
+The context of the environment being attacked is extremely important for this technique to be successful due to some EDR vendors having [Windows Hardware Quality Labs (WHQL)](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/whql-release-signature) drivers. These drivers are allowed by default on WDAC policies and will allow WHQL signed EDR drivers to load despite their service binaries being blocked. During testing it was found that although the EDR service was successfully blocked, the EDR's driver was allowed to load and continued to show activity. While perhaps the most obvious solution to this from an adversarial perspective would be to simply disallow WHQL drivers, this creates significant risk of the endpoint failing to boot. After all, the goal of this technique is ultimately to assist in lateral movement procedures, which becomes impossible if the device never boots. Therefore, a better way to specifically block kernel mode components is to block based off either a specific publisher or file attribute. During testing, it was found that some EDR vendors have drivers that will not allow the machine to boot if not allowed to run. These drivers did not appear to send any network traffic, so it was decided to not block based off of publisher alone and instead focus on blocking based off of file attributes. This proved to be extremely successful, as the targeted drivers and executables were not allowed to load without device disruption.
 
 As previously mentioned, a specialized WDAC policy is extremely important for this attack to make sense from an adversarial perspective. For blocking EDR that does **not** have WHQL drivers, this policy must at least:
 
-1. be in **enforce mode**
-2. **allow a generic path** so executables (ie post-exploitation capability) may be staged for execution
+1. Be in **enforce mode**
+2. **Allow a generic path** so executables (ie post-exploitation capability) may be staged for execution
 
 The first requirement is very easy to implement - just turn off audit mode. For the second requirement, selecting any arbitrary location to store potential post-exploitation capability material will suffice.
 
@@ -91,9 +91,9 @@ In addition to the compiled policy, an XML representation of the policy configur
 ## Finding the Attack Vector
 After creating a WDAC policy, it is time to find a way to use it. There are three major attack types:
 
-1. local machine
-2. remote machine
-3. full domain
+1. Local machine
+2. Remote machine
+3. Full domain
 
 For a **single machine (local/remote)**, all that is needed to deploy a WDAC policy is write permissions on `C:\Windows\System32\CodeIntegrity\`, which by default requires that you have **administrative permissions**.
 
@@ -186,12 +186,12 @@ On the other hand, there are EDR vendors that employ WHQL signed drivers, thereb
 
 While creating a detection solely based off of strings could detect malicious policies, doing so creates a significant number of false positives. Therefore, having the ability to detect bytes within the compiled policy becomes of the essence. After analyzing dumps of compiled WDAC policies, there were a few key observations made as to how compiled WDAC policies are structured.
 
-| Byte Offset(s)  | Description                                                                                                                | Byte(s)                                                    |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| `0x00` - `0x04` | Marks the file as a compiled WDAC policy                                                                                   | `0x07 00 00 00 0E`                                         |
-| `0x25`          | Disable Runtime Filepath Rules (Allows file paths to be used in the policy)                                                | `0x20` for off<br>`0x28` for on                            |
-| `0x26`          | Controls enforce/audit mode                                                                                                | `0x8C` for Enforce<br>`0x8D` for Audit                     |
-| `0xE0` - `0xE7` | More research is needed, but this seems to control allow/block rules necessary for this attack technique to work correctly | `0xFF FF FF FF FF FF FF FF `<br>`0x00 00 00 00 00 00 00 00` |
+| Byte Offset(s)  | Description                                                                                                                | Byte(s)                                                                              |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `0x00` - `0x04` | Marks the file as a compiled WDAC policy                                                                                   | `0x07 00 00 00 0E`                                                                   |
+| `0x25`          | Disable Runtime Filepath Rules (Allows file paths to be used in the policy)                                                | `0x20` for off<br>`0x28` for on                                                      |
+| `0x26`          | Controls enforce/audit mode                                                                                                | `0x8C` for Enforce<br>`0x8D` for Audit                                               |
+| `0xE0` - `0xE7` | More research is needed, but this seems to control allow/block rules necessary for this attack technique to work correctly | `0xFF FF FF FF FF FF FF FF` for Blocking<br>`0x00 00 00 00 00 00 00 00` for Allowing |
 
 During the course of research, it was determined that detecting specific blocking rules based off of compiled WDAC policies is extraordinarily difficult given how WDAC policies are structured. Therefore, it became apparent that a lightweight detection was necessary, which resulted in YARA rules that detect the use of Krueger as well as compiled WDAC policies which mention specific file attributes. These YARA rules, while working against malicious policies also have false positives that have yet to be solved. Therefore, please use these rules at your own risk. For the detections that were made, go to [Krueger's Github repository](https://github.com/logangoins/Krueger).
 
