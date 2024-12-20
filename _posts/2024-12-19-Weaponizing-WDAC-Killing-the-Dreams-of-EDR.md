@@ -30,7 +30,7 @@ In short, this is a technique primarily designed at defense evasion and assistan
 - Potential Impact: all security tooling across an entire Active Directory Forest may be systematically stopped remotely
 
 # Attack Technique
-Although this attack may be executed in a multitude of ways, there is still one common factor - WDAC. Because WDAC policies deny by default it is extraordinarily trivial to block many EDR sensors from loading. However, a primary consideration for an adversary is both establishing their own access while restricting the access of defensive solutions. Hence the WDAC policy would need to explicitly allow an adversary execution privileges in order to make sense from an offensive perspective. This is where crafting a specialized WDAC policy is most useful. With a custom policy an adversary may stop EDR sensors, while also allowing themselves execution permissions.
+Although this attack may be executed in a multitude of ways, there is still one common factor - WDAC. Because WDAC policies deny by default, it is extraordinarily trivial to block many EDR sensors from loading. However, a primary consideration for an adversary is both establishing their own access while restricting the access of defensive solutions. Hence the WDAC policy would need to explicitly allow an adversary execution privileges in order to make sense from an offensive perspective. This is where crafting a specialized WDAC policy is most useful. With a custom policy an adversary may stop EDR sensors, while also allowing themselves execution permissions.
 
 <p align="center">
     <img src="https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/Killing-EDR-with-WDAC.drawio.png" />
