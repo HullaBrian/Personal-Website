@@ -3,7 +3,7 @@ layout: post
 title: "Weaponizing WDAC: Killing the Dreams of EDR"
 subtitle: ""
 thumbnail-img: https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/my-child-will.jpg
-share-img: https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/Killing-EDR-with-WDAC-non-transparent.drawio.png
+share-img: https://github.com/user-attachments/assets/d8a5f2cb-6ca6-4e8f-80ee-1fdac8d0e20e
 author: Jonathan Beierle and Logan Goins
 tags: ["Windows Security", "Active Directory"]
 ---
