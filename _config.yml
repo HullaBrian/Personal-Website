@@ -52,6 +52,7 @@ round-avatar: true
 social-network-links:
   email: "jonathan@beierle.win"
   github: hullabrian
+  twitter: hullabrian
 #  medium: yourname
 #  reddit: yourname
   linkedin: jonathan-beierle
@@ -85,7 +86,7 @@ rss-description: RSS exists!
 
 # Select which social network share links to show in posts
 share-links-active:
-  twitter: false
+  twitter: true
   facebook: false
   linkedin: true
   vk: false
