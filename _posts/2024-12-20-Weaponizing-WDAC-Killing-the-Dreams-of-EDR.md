@@ -104,7 +104,7 @@ Using this attack on a local machine is by far the most simple out of all method
 
 ![alt text](/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/local-machine.png)
 
-```powershell
+```
 cp .\SiPolicy.p7b C:\Windows\System32\CodeIntegrity\
 ```
 

@@ -448,7 +448,7 @@ footer .footer-custom-content {
 
 .post-preview {
   padding: 1.25rem 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #86aaf9;
   overflow: hidden;
 }
 
@@ -885,7 +885,7 @@ pre {
 }
 .highlight pre {
   border: none;
-  background: none;
+  background: #2f3d5c;
   margin: 0;
 }
 .highlight > pre {
