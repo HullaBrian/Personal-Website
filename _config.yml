@@ -10,7 +10,7 @@
 ############################
 
 # Name of website
-title: Blog
+title: Jonathan Beierle
 
 # Your name to show in the footer
 author: Jonathan Beierle
@@ -20,11 +20,11 @@ author: Jonathan Beierle
 ###############################################
 
 navbar-links:
+  About Me: "about-me"
+  LinkedIn: "https://linkedin.com/in/Jonathan-Beierle"
+  Twitter: "https://x.com/hullabrian"
+  Github: "https://github.com/HullaBrian"
   Resume: "assets/Resume-REDACTED.pdf"
-#  Resources:
-#    - Beautiful Jekyll: "https://beautifuljekyll.com"
-#    - Learn markdown: "https://www.markdowntutorial.com/"
-#  Author's home: "https://deanattali.com"
 
 ################
 # --- Logo --- #
@@ -50,7 +50,6 @@ round-avatar: true
 # You can change the order that they show up on the page by changing the order here.
 # Uncomment the links you want to show and add your information to each one.
 social-network-links:
-  email: "jonathan@beierle.win"
   github: hullabrian
   twitter: hullabrian
 #  medium: yourname
@@ -124,17 +123,17 @@ navbar-var-length: false
 
 # Personalize the colours in your website. Colour values can be any valid CSS colour
 
-navbar-col: "#EAEAEA"
-navbar-text-col: "#404040"
-navbar-border-col: "#DDDDDD"
-page-col: "#FFFFFF"
-text-col: "#404040"
-link-col: "#008AFF"
-hover-col: "#0085A1"
-footer-col: "#EAEAEA"
-footer-text-col: "#777777"
-footer-link-col: "#404040"
-footer-hover-col: "#0085A1"
+page-col: "#161625"
+text-col: "#F6F6F7"
+link-col: "#86AAF9"
+hover-col: "#FFFFFF"
+navbar-col: "#2F3D5C"
+navbar-text-col: "#CFD2D9"
+navbar-border-col: "#2F3D5C"
+footer-col: "#2F3D5C"
+footer-text-col: "#CFD2D9"
+footer-link-col: "#FFFFFF"
+footer-hover-col: "#FFFFFF"
 
 # Alternatively, the navbar, footer, and page background can be set to an image
 # instead of colour
