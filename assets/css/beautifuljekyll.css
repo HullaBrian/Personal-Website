@@ -823,7 +823,7 @@ nav.top-nav-short-permanent ~ header > .intro-header.big-img {
 .pagination .page-item .page-link:focus {
   color: #2f3d5c;
   border: 1px solid {{ site.hover-col | default: "#0085A1" }};
-  background-color: {{ site.hover-col | default: "#0085A1" }};
+  background-color: #86aaf9;
 }
 
 /* --- Tables --- */
