@@ -224,7 +224,7 @@ rule MALDAC {
         date_updated = ""
 		reference = "https://github.com/logangoins/Krueger"
 		reference = "https://beierle.win/2024-12-20-Weaponizing-WDAC-Killing-the-Dreams-of-EDR/"
-		reference = "TBD"
+		reference = "https://beierle.win/2025-08-28-A-Nightmare-on-EDR-Street-WDACs-Revenge/"
 	strings:
 		/* Strings and bytes used to identify an embedded WDAC policy */
 		$wdac_signature = { (07 | 08) 00 00 00 0E }
@@ -270,7 +270,7 @@ rule DreamDemon {
 		sample = "2a00212b6f0217a2795aa909be49f91751b3cde1725b54c95450c778072f2308"
 		date_created = "25 August 2025"
 		date_updated = ""
-		reference = "TBD"
+		reference = "https://beierle.win/2025-08-28-A-Nightmare-on-EDR-Street-WDACs-Revenge/"
 	strings:
 		/* References to WDAC-related locations
 			"\\C$\\System32\\CodeIntegrity\\SiPolicy.p7b"
