@@ -133,6 +133,7 @@ Another oddity with one of the samples is that it executes `C:\WINDOWS\system32\
 | `94bf6cfd0bcaa098769a39dfd6cca50050f26e20f06e8fbdfec103d4b8b303cb` | DreamDemon Sample      | `2025-06-09 00:41:22 UTC` |
 | `2a00212b6f0217a2795aa909be49f91751b3cde1725b54c95450c778072f2308` | DreamDemon Sample      | `2025-07-06 22:22:49 UTC` |
 | `31A98D9D66862AD23E8866C4124D8B202DA03FB0B68781FC84F3175ED6D5FBB4` | DreamDemon WDAC Policy | `2025-08-20 04:55:56 UTC` |
+
 Below are the paths referenced by the DreamDemon WDAC policy I obtained. I didn't rigorously test it, but from my basic tests and understanding of WDAC, the paths specifically referencing security products are the block-related rules, while rules such as `%OSDRIVE%\*` are meant to allow normal execution of anything that isn't already denied.
 - `%OSDRIVE%\Program Files (x86)\360\*`
 - `%OSDRIVE%\Program Files (x86)\Avast Software\Avast\*`
