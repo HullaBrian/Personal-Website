@@ -41,6 +41,7 @@ Shortly after releasing the original research I set up a YARA rule that actively
 | `a795b79f1d821b8ea7b21c7fb95d140512aaef5a186da49b9c68d8a3ed545a89` | Krueger | `2025-08-14 02:23:34 UTC` |
 | `a41a2f5c531212a07ade7b3bed06b21eccfb686cd6cce053a6fab892171a372f` | Krueger | `2025-03-24 14:53:44 UTC` |
 | `073e2a7e639a6dd7d406828bf7c8d51ffe67a2c287df88ba72b65d01923f3f43` | Krueger | `2025-06-01 17:43:24 UTC` |
+
 After analyzing the policies embedded within the samples, I gathered the following collection of rules:
 
 | Allow/Block | Rule Type        | Value                                                                   | Targeted Vendor(s) |
@@ -58,6 +59,7 @@ After analyzing the policies embedded within the samples, I gathered the followi
 | Block       | File Description | `Antimalware Core Service`                                              | Microsoft          |
 | Block       | File Description | `CrowdStrike Falcon Sensor Driver`                                      | CrowdStrike        |
 | Block       | File Description | `CrowdStrike Falcon Sensor`                                             | CrowdStrike        |
+
 Although these rules block the majority of executable code they target, they aren't perfect. For instance, there are 3 file path rules pointing to EDR drivers that likely run in kernel space. However, file path rules cannot block kernel mode code and thus would not entirely block the targeted EDR products. That being said, the policies used by the observed samples could be significantly improved, but I'll get to that later in this post.
 
 Overall, a variety of products have been targeted by WDAC policies including (but not limited to) CrowdStrike Falcon, SentinelOne, Microsoft Defender for Endpoint (MDE), Windows Defender, Velociraptor, Symantec, and Tanium.
@@ -73,14 +75,14 @@ Overall the industry response has appeared to be positive, with more people taki
 Further, while the initial number of detections from security vendors on VirusTotal for Krueger were relatively low, detections seemed to have jumped to be well over 40/72. Not only that, but many seem to label Krueger samples as either something related to Krueger or WDAC - something I find really cool! (See [VirusTotal Collection](https://www.virustotal.com/gui/collection/f71648f5deb4618be36324c734904cfd59d7325291773f79608b178e0497c931/iocs))
 
 Below is a list of articles/blogs referencing or about the technique and/or Krueger.
-- https://meterpreter.org/krueger-proof-of-concept-poc-net-tool-for-remotely-killing-edr-with-wdac/
-- https://cybersecuritynews.com/attack-weaponizes-windows-defender/
-- https://www.pinetworks.net/post/advanced-cyberattack-exploits-windows-defender-to-disable-edr
-- https://kalilinuxtutorials.com/krueger/
-- https://windowsforum.com/threads/exploiting-wdac-how-attackers-bypass-edr-sensors-and-what-to-do.348590/
-- https://undercodetesting.com/weaponizing-wdac-killing-the-dreams-of-edr/
-- https://www.truesec.com/hub/blog/new-wdac-exploit-technique-leveraging-policies-to-disable-edrs-and-evade-detection
-- https://red.infiltr8.io/redteam/evasion/endpoint-detection-respons-edr-bypass/windows-defender-application-control-wdac-killing-edr
+- [https://meterpreter.org/krueger-proof-of-concept-poc-net-tool-for-remotely-killing-edr-with-wdac/](https://meterpreter.org/krueger-proof-of-concept-poc-net-tool-for-remotely-killing-edr-with-wdac/)
+- [https://cybersecuritynews.com/attack-weaponizes-windows-defender/](https://cybersecuritynews.com/attack-weaponizes-windows-defender/)
+- [https://www.pinetworks.net/post/advanced-cyberattack-exploits-windows-defender-to-disable-edr](https://www.pinetworks.net/post/advanced-cyberattack-exploits-windows-defender-to-disable-edr)
+- [https://kalilinuxtutorials.com/krueger/](https://kalilinuxtutorials.com/krueger/)
+- [https://windowsforum.com/threads/exploiting-wdac-how-attackers-bypass-edr-sensors-and-what-to-do.348590/](https://windowsforum.com/threads/exploiting-wdac-how-attackers-bypass-edr-sensors-and-what-to-do.348590/)
+- [https://undercodetesting.com/weaponizing-wdac-killing-the-dreams-of-edr/](https://undercodetesting.com/weaponizing-wdac-killing-the-dreams-of-edr/)
+- [https://www.truesec.com/hub/blog/new-wdac-exploit-technique-leveraging-policies-to-disable-edrs-and-evade-detection](https://www.truesec.com/hub/blog/new-wdac-exploit-technique-leveraging-policies-to-disable-edrs-and-evade-detection)
+- [https://red.infiltr8.io/redteam/evasion/endpoint-detection-respons-edr-bypass/windows-defender-application-control-wdac-killing-edr](https://red.infiltr8.io/redteam/evasion/endpoint-detection-respons-edr-bypass/windows-defender-application-control-wdac-killing-edr)
 
 # Research Updates
 ## New Malware Family - DreamDemon
