@@ -128,6 +128,7 @@ Unfortunately, I have not analyzed what the data means in the logs, but I suspec
 Another oddity with one of the samples is that it executes `C:\WINDOWS\system32\cmd.exe /c gpupdate /force > nul 2>&1` after dropping the WDAC policy to disk. What's odd about this is that simply updating group policy after putting a WDAC policy in the code integrity folder doesn't apply the policy. For the group policy update to do anything, the local group policy would already have to be set to point to that specific file path.
 
 ### IOCs and Referenced Paths
+
 | SHA256                                                             | Type                   | Submission Date           |
 | ------------------------------------------------------------------ | ---------------------- | ------------------------- |
 | `94bf6cfd0bcaa098769a39dfd6cca50050f26e20f06e8fbdfec103d4b8b303cb` | DreamDemon Sample      | `2025-06-09 00:41:22 UTC` |
