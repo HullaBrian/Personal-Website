@@ -26,7 +26,7 @@ tags: ["Windows Security", "Malware Analysis", "Offensive Tradecraft"]
 	- [YARA Tuning](#yara-tuning)
 
 # Introduction
-After releasing research detailing the use of Windows Defender Application Control (WDAC) in late December 2024, there have been a number of interesting developments that have resulted in the creation of this post. The research was originally meant to be a proof-of-concept for the technique, but developments since its release have indicated that cybercriminals have taken an interest in the technique. This, coupled with the general lack of preventative capabilities from EDR vendors, is a dangerous combination.
+After releasing research detailing the use of Windows Defender Application Control (WDAC) to block Endpoint Detection and Response (EDR) in late December 2024, there have been a number of interesting developments that have resulted in the creation of this post. The research was originally meant to be a proof-of-concept for the technique, but developments since its release have indicated that cybercriminals have taken an interest in the technique. This, coupled with the general lack of preventative capabilities from EDR vendors, is a dangerous combination.
 
 While this blog post will cover retrospectives, it will also cover new developments of the WDAC policy as well as overall offensive WDAC tradecraft which may be used by threat actors. Unlike the last post, there won’t be any tool releases or updates, since updating the PoC would likely cause more harm than good.
 
