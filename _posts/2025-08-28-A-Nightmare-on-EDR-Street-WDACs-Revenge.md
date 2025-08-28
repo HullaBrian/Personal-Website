@@ -207,7 +207,7 @@ Another area of potential detection is that of the file type. WDAC policies have
 ## YARA Tuning
 After analyzing DreamDemon and more Krueger samples, I decided that it would be worth it to both tune the Krueger YARA rule and create a DreamDemon YARA rule. Below are the completed rules. Both the Krueger and DreamDemon rules depend on a rule called `MALDAC` - a YARA rule meant to detect the presence of a WDAC policy that references the paths of known security vendor related files.
 
-```YARA
+```
 import "dotnet"
 
 rule MALDAC {
