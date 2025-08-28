@@ -5,7 +5,7 @@ subtitle: ""
 thumbnail-img: https://beierle.win/assets/img/weaponizing-wdac-killing-the-dreams-of-edr/my-child-will.jpg
 share-img: https://github.com/user-attachments/assets/d8a5f2cb-6ca6-4e8f-80ee-1fdac8d0e20e
 author: Jonathan Beierle and Logan Goins
-tags: ["Windows Security", "Active Directory"]
+tags: ["Windows Security", "Active Directory", "Offensive Tradecraft"]
 ---
 
 - [The Concept](#the-concept)
