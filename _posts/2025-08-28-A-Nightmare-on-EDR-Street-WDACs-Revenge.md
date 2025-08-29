@@ -215,7 +215,7 @@ import "dotnet"
 rule MALDAC {
 	meta:
 		author = "Jonathan Beierle"
-		description = "Detects samples designed to use WDAC to disable AV/EDR"
+		description = "Detects samples designed to use WDAC to disable AV/EDR. False positives may occur."
 		rule_category = "Technique"
 		usage = "Hunting and Identification"
 		sample = "94bf6cfd0bcaa098769a39dfd6cca50050f26e20f06e8fbdfec103d4b8b303cb"
